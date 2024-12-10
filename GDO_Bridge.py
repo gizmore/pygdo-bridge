@@ -2,6 +2,7 @@ from gdo.base.GDO import GDO
 from gdo.base.GDT import GDT
 from gdo.base.Message import Message
 from gdo.base.Render import Mode
+from gdo.base.Util import Strings, html
 from gdo.core.GDO_Channel import GDO_Channel
 from gdo.core.GDT_AutoInc import GDT_AutoInc
 from gdo.core.GDT_Channel import GDT_Channel
@@ -47,4 +48,7 @@ class GDO_Bridge(GDO):
         await msg.get_connector().send_to_channel(msg, False)
 
     async def bridge_outgoing(self, message: Message):
-        pass
+        target = self.get_target_channel(message)
+        t_serv = target.get_server()
+        msg = Message('', Mode.TXT).env_copy(message).env_channel(target).env_server(t_serv).result(html(Strings.html_to_text(message._result)))
+        await msg.get_connector().send_to_channel(msg, False)
