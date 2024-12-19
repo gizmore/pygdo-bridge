@@ -7,18 +7,23 @@ from gdo.core.GDO_Channel import GDO_Channel
 from gdo.core.GDT_AutoInc import GDT_AutoInc
 from gdo.core.GDT_Channel import GDT_Channel
 from gdo.core.GDT_Creator import GDT_Creator
+from gdo.core.GDT_Unique import GDT_Unique
 from gdo.date.GDT_Created import GDT_Created
 
 
 class GDO_Bridge(GDO):
+    """
+    An entry in the gdo_bridge table.
+    """
 
     def gdo_columns(self) -> list[GDT]:
         return [
             GDT_AutoInc('bridge_id'),
-            GDT_Channel('bridge_a'),
-            GDT_Channel('bridge_b'),
+            GDT_Channel('bridge_a').not_null(),
+            GDT_Channel('bridge_b').not_null(),
             GDT_Creator('bridge_creator'),
             GDT_Created('bridge_created'),
+            GDT_Unique('unique_bridge').unique_columns('bridge_a', 'bridge_b'),
         ]
 
     @classmethod

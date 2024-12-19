@@ -6,6 +6,10 @@ from gdo.core.GDT_Channel import GDT_Channel
 
 
 class bridge(Method):
+    """
+    Bridge 2 GDO_Channels.
+    Lower ID is bridge_a
+    """
 
     def gdo_trigger(self) -> str:
         return 'bridge'
@@ -13,7 +17,7 @@ class bridge(Method):
     def gdo_in_private(self) -> bool:
         return False
 
-    def gdo_parameters(self) -> [GDT]:
+    def gdo_parameters(self) -> list[GDT]:
         return [
             GDT_Channel('target_channel').not_null(),
         ]
@@ -21,10 +25,12 @@ class bridge(Method):
     def get_target_channel(self) -> GDO_Channel:
         return self.param_value('target_channel')
 
-    def gdo_execute(self):
+    def gdo_execute(self) -> GDT:
         target = self.get_target_channel()
+        a = self._env_channel.get_id()
+        b = target.get_id()
         GDO_Bridge.blank({
-            'bridge_a': self._env_channel.get_id(),
-            'bridge_b': target.get_id(),
+            'bridge_a': min(a, b),
+            'bridge_b': max(a, b),
         }).insert()
-        return self.reply('msg_bridged')
+        return self.reply('msg_bridged', [target.render_name()])
