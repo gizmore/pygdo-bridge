@@ -25,7 +25,7 @@ class bridge(Method):
     def get_target_channel(self) -> GDO_Channel:
         return self.param_value('target_channel')
 
-    async def gdo_execute(self) -> GDT:
+    def gdo_execute(self) -> GDT:
         target = self.get_target_channel()
         a = self._env_channel.get_id()
         b = target.get_id()

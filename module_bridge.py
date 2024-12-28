@@ -11,7 +11,7 @@ class module_bridge(GDO_Module):
             GDO_Bridge,
         ]
 
-    async def gdo_subscribe_events(self):
+    def gdo_subscribe_events(self):
         Application.EVENTS.subscribe('new_message', self.on_incoming)
         Application.EVENTS.subscribe('msg_sent', self.on_outgoing)
 

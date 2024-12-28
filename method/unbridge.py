@@ -26,7 +26,7 @@ class unbridge(Method):
     def get_target_channel(self) -> GDO_Channel:
         return self.param_value('target_channel')
 
-    async def gdo_execute(self) -> GDT:
+    def gdo_execute(self) -> GDT:
         a = self._env_channel.get_id()
         query = GDO_Bridge.table().select()
         if self.param_value('all'):
