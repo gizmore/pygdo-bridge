@@ -2,6 +2,7 @@ from gdo.base.GDT import GDT
 from gdo.base.Method import Method
 from gdo.bridge.GDO_Bridge import GDO_Bridge
 from gdo.core.GDO_Channel import GDO_Channel
+from gdo.core.GDO_Permission import GDO_Permission
 from gdo.core.GDT_Bool import GDT_Bool
 from gdo.core.GDT_Channel import GDT_Channel
 
@@ -13,6 +14,9 @@ class unbridge(Method):
 
     def gdo_trigger(self) -> str:
         return 'unbridge'
+
+    def gdo_user_permission(self) -> str | None:
+        return GDO_Permission.STAFF
 
     def gdo_in_private(self) -> bool:
         return False
