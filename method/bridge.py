@@ -37,4 +37,4 @@ class bridge(Method):
             'bridge_a': min(a, b),
             'bridge_b': max(a, b),
         }).insert()
-        return self.reply('msg_bridged', [target.render_name()])
+        return self.reply('msg_bridged', (target.render_name(),))

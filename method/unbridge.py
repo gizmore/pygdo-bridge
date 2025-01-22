@@ -37,8 +37,8 @@ class unbridge(Method):
             bridges = query.where(f'bridge_a={a} OR bridge_b={a}').exec()
             for bridge in bridges:
                 bridge.delete()
-            return self.reply('msg_unbridged_all', [self._env_channel.render_name()])
+            return self.reply('msg_unbridged_all', (self._env_channel.render_name(),))
         b = self.get_target_channel().get_id()
         bridge = query.where(f'(bridge_a={a} AND bridge_b={b}) OR (bridge_a={b} AND bridge_b={a})').first().exec().fetch_object()
         bridge.delete()
-        return self.reply('msg_unbridged', [self.get_target_channel().render_name(), self._env_channel.render_name()])
+        return self.reply('msg_unbridged', (self.get_target_channel().render_name(), self._env_channel.render_name()))
