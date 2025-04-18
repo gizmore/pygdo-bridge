@@ -12,7 +12,8 @@ class unbridge(Method):
     Remove one or all chat channel bridge(s)
     """
 
-    def gdo_trigger(self) -> str:
+    @classmethod
+    def gdo_trigger(cls) -> str:
         return 'unbridge'
 
     def gdo_user_permission(self) -> str | None:

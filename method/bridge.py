@@ -12,7 +12,8 @@ class bridge(Method):
     Lower ID is bridge_a
     """
 
-    def gdo_trigger(self) -> str:
+    @classmethod
+    def gdo_trigger(cls) -> str:
         return 'bridge'
 
     def gdo_in_private(self) -> bool:
