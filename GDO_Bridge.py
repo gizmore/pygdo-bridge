@@ -49,11 +49,11 @@ class GDO_Bridge(GDO):
     async def bridge_incoming(self, message: Message):
         target = self.get_target_channel(message)
         t_serv = target.get_server()
-        msg = Message('', Mode.TXT).env_copy(message).env_channel(target).env_server(t_serv).result(message._message)
+        msg = Message('', Mode.txt).env_copy(message).env_channel(target).env_server(t_serv).result(message._message)
         await msg.get_connector().send_to_channel(msg, False)
 
     async def bridge_outgoing(self, message: Message):
         target = self.get_target_channel(message)
         t_serv = target.get_server()
-        msg = Message('', Mode.TXT).env_copy(message).env_channel(target).env_server(t_serv).result(html(Strings.html_to_text(message._result)))
+        msg = Message('', Mode.txt).env_copy(message).env_channel(target).env_server(t_serv).result(html(Strings.html_to_text(message._result)))
         await msg.get_connector().send_to_channel(msg, False)
