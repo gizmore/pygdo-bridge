@@ -2,11 +2,12 @@ from gdo.base.Application import Application
 from gdo.base.GDO_Module import GDO_Module
 from gdo.base.Message import Message
 from gdo.bridge.GDO_Bridge import GDO_Bridge
+from gdo.base.GDO import GDO
 
 
 class module_bridge(GDO_Module):
 
-    def gdo_classes(self):
+    def gdo_classes(self) -> list[type[GDO]]:
         return [
             GDO_Bridge,
         ]
